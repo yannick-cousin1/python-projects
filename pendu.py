@@ -36,25 +36,6 @@ def list_to_string(LIST):   #function to convert a list to a string (each value 
 
 #############################################################################
 
-nb_lettres_trouve = 0         # counters for letters found and hit points
-hp = 0
-
-already_tried = ''            # string to store char already tried
-lettre = ''                   # string to store user's input
-lvl = 0
-
-while lvl != 1 and lvl != 2 and lvl != 3:
-    lvl = int(input ("Choisissez un niveau :\n1 = Debutant / 2 = Intermediaire / 3 = Expert\n"))
-
-    if lvl == 1:
-        hp = 10                             # Here the user can choose the difficulty
-    elif lvl == 2:                          # His choice will set the amount of hit point he get
-        hp = 7
-    elif lvl == 3:
-        hp = 4
-    else:
-        print("Erreur, choisissez 1, 2 ou 3")
-
 
 
 with open("dico_france.txt", encoding = "ISO-8859-1") as dico:   #We need to replace each special char by a normal char
@@ -82,11 +63,37 @@ with open("dico_france.txt", encoding = "ISO-8859-1") as d:
 word = dlist[random.randint(0,length(dlist)-1)]
 
 ######################################################################
+
+nb_lettres_trouve = 0         # counters for letters found and hit points
+hp = 0
+
+already_tried = ''            # string to store char already tried
+lettre = ''                   # string to store user's input
+lvl = 0
+
+#####################################################################
+
+while lvl != 1 and lvl != 2 and lvl != 3:
+    lvl = int(input ("Choisissez un niveau :\n1 = Debutant / 2 = Intermediaire / 3 = Expert\n"))
+
+    if lvl == 1:
+        hp = 10                             # Here the user can choose the difficulty
+    elif lvl == 2:                          # His choice will set the amount of hit point he get
+        hp = 7
+    elif lvl == 3:
+        hp = 4
+    else:
+        print("Erreur, choisissez 1, 2 ou 3")
+
+
+#########################################################################
+
 # And let's go for the main loop :
 
 while nb_lettres_trouve != length(word)-1 and hp > 0:    # While the whole word isn't found, while user still has
     print("Nombre de vie(s) restante(s) : ", hp)         # hit points
                                                          # print how many hit points he has
+    print ("%d lettres à trouver pour gagner !" % (length(word)-nb_lettres_trouve-1))
     if (lvl != 3):                                       # if we're not in "expert mode",
         print("Lettres proposées : ", already_tried)     # print letters he has already tried
 
